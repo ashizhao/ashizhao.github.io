@@ -13,7 +13,7 @@
     <meta name="robots" content="all,follow">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Ceusn Template</title>
+    <title>ANF Template</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./CSS/bootstrap.css" rel="stylesheet">
@@ -38,7 +38,7 @@
     <!-- onepage scroll stylesheet-->
     <!--link rel="stylesheet" href="./CSS/onepage-scroll.css"-->
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="./CSS/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="./CSS/style.anf.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <!---link rel="stylesheet" href="css/custom.css"-->
 
@@ -84,7 +84,6 @@
                   <div class="col-xs-4">
                     <!--LOGO BEGIN-->
                     <div id="logo">
-                      <!--img src="./img/CEUSN-logo.jpg" class="img-responsive" alt="Responsive image"-->
                     </div>
                     <!--LOGO END-->
                   </div>
@@ -143,7 +142,7 @@
   <div id="work-area" style="padding-top:100px;">
 
     <!--BANNER-->
-    <div class="jumbotron">
+    <!--div class="jumbotron">
       <img src="./img/PrimaryBanner.jpg" class="img-responsive" alt="Responsive image">
     </div>
 
@@ -353,11 +352,46 @@
           <h2 class="heading">Deployment</h2>
           <p class="caption">...</p>
 
+          <script type="text/javascript" src="./js/jquery-2.0.3.min.js"></script>
+          <script type="text/javascript" src="./js/jquery-ui-1.10.4.custom.min.js"></script>
+          <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 
-          <h1>Deployment Map</h1>
+          <script type="text/javascript" src="./js/google_maps.js"></script>
+          <script type="text/javascript" src="./js/icon_with_label.js"></script>
+          <script type="text/javascript" src="./js/anf_conf.ini.html"></script>
+
+          <script type = "text/javascript">
+
+            $(document).ready(function() {
+
+            // MUST be before tabs - else ui-tabs throws an error
+            $(".expanded-info").hide();
+            $('#info_div').click(function() {
+              var thisText = $(this).attr('rel');
+              var toggleDiv = $(this).parent().next('div');
+              if( toggleDiv.is(':visible') ) {
+                toggleDiv.hide('slow');
+                $(this).html('Show '+thisText+' &darr;');
+              } else {
+                toggleDiv.show('slow');
+                $(this).html('Hide '+thisText+' &uarr;');
+              }
+              return false ;
+            });
+            var mapObject = new GoogleMap('google_map',
+              {"holdMap":false,"iconInfoURL":"infowindow.php","tableInfoURL":false,"markersize":false,"stationIconSize":20,"snet":[],"refreshSecs":0,"iconapi":"\/api\/ta\/mapimg\/","initZoom":5,"defaultLocation":[37,-85],"panIcons":[],"display_types":[{"value":"snet","text":"Network","selected":true},{"value":"vnet","text":"VirtualNet","selected":false},{"value":"commtype","text":"CommType","selected":false},{"value":"provider","text":"Provider","selected":false},{"value":"digitizer","text":"Digitizer","selected":false},{"value":"sensor","text":"Sensor","selected":false}],"statusOptions":[]});
+
+
+            mapObject.addStaticStations( data, 'google_map_table');
+
+            });
+
+          </script>
+
+          <h6>Deployment Map</h6>
           <p>
-            <a href="index.html#instructions" id="info_div" rel="information about this page">Show information about this page &darr;</a>&nbsp;|&nbsp;
+            <a href="index.html#instructions" id="info_div" rel="information about this page">Show information about this page &darr;</a>&nbsp;&nbsp;
 
           </p>
 
@@ -383,7 +417,7 @@
                 <!-- <p>Data source: http://ceusn.ucsd.edu/api/ceusn/stations/?fields=id|orb|endtime</p> -->
                 <!-- <p>Data source: http://ceusn.ucsd.edu/api/ceusn/stations/?fields=id|orb|endtime|vnet|snet|sta|time|lat|lon|elev|sensor|digitizer|comm&all=true</p> -->
                 <div id="panel">
-                  <h1>Active Stations</h1>
+                  <h6>Active Stations</h6>
                   <p>
                     There are currently 280 stations
                     returning data out of a total number of 295 active stations
@@ -527,41 +561,19 @@
 
   </div>
   <!--END WORK AREA-->
-  <script>
-  function stylechange(){
-    alert("in index");
-    var host = document.URL;
-    var link  = document.createElement('link');
 
-    if(host == "http://localhost:8888/footer/partners.html"){
-      alert("wrong");
-      link.rel = "stylesheet";
-      link.href = "../CSS/style.default.css"
-    }
-    else if(host == "http://localhost:8888/anza_index.html"){
-      link.rel = "stylesheet";
-      link.href = "../CSS/style.anza.css"
-    }
-    else if(host == "http://localhost:8888/anf_index.html"){
-      link.rel = "stylesheet";
-      link.href = "../CSS/style.anf.css"
-    }
-  }
-  </script>
 
 
     <!--BEGIN FOOTER-->
-
-
     <div id="footer" class="container">
         <hr></hr>
         <div style="width:49%;float:left;padding-left:20px;">
-        <p><a href="./footer/faq.html" title="Frequently asked questions" id="faq" onclick="stylechange();">FAQ |</a>
-        <a href="./footer/goals.html" title="Read about our goals"id="goals" onclick="stylechange();">Goals |</a>
-        <a href="./footer/links.html" title="External links" id="links" onclick="stylechange()">Links |</a>
-        <a href="./footer/partners.html" title="Information on our partners" id="partners"onclick="stylechange()">Partners |</a>
-        <a href="./footer/api/api.html" title="Information on our RESTful API" id="api"onclick="stylechange()">API |</a>
-        <a href="./footer/publications.html" title="Array Network Facility publications" id="pub"onclick="stylechange()">Publications</a>
+        <p><a href="../footer/faq.html" title="Frequently asked questions" id="faq" onclick="stylechange()">FAQ</a> |
+        <a href="../footer/goals.html" title="Read about our goals"id="goals"onclick="stylechange()">Goals</a> |
+        <a href="../footer/links.html" title="External links" id="links"onclick="stylechange()">Links</a> |
+        <a href="/partners/" title="Information on our partners" id="partners"onclick="stylechange()">Partners</a> |
+        <a href="/api/" title="Information on our RESTful API" id="api"onclick="stylechange()">API</a> |
+        <a href="/publications/" title="Array Network Facility publications" id="pub"onclick="stylechange()">Publications</a>
         <br/>EarthScope is funded by the <a href="http://www.nsf.gov">National Science Foundation</a>.
         The EarthScope Array Network Facility supports USArray
         with the <a href="http://www.iris.edu">Incorporated Research Institutions for Seismology</a>.<br/>
@@ -649,7 +661,6 @@
          log: function() { }
        };
       }
-
     </script>
 
     <!--scroll screen for each pg section-->
